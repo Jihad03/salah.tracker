@@ -36,6 +36,22 @@ function getTodayDateString() {
     return `${yyyy}-${mm}-${dd}`;
 }
 
+// NEW: Calculates and updates the visual progress bar
+function updateProgress() {
+    const prayers = ['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'];
+    let completedCount = 0;
+    
+    prayers.forEach(prayer => {
+        if (document.getElementById(prayer).checked) {
+            completedCount++;
+        }
+    });
+    
+    const percentage = (completedCount / 5) * 100;
+    document.getElementById('progress-text').innerText = `${completedCount} of 5 completed`;
+    document.getElementById('progress-fill').style.width = `${percentage}%`;
+}
+
 // Load today's data from Firebase when logged in
 async function loadTodaySalah(userId){
     const dateStr = getTodayDateString();
@@ -50,6 +66,9 @@ async function loadTodaySalah(userId){
         ['fajr','dhuhr','asr','maghrib', 'isha'].forEach(salah => {
             document.getElementById(salah).checked = data[salah] || false;
         })
+
+        // Update the progress bar after loading the database data
+        updateProgress();
     } catch (error){
         console.error("Error loading salah:", error);
     }
@@ -58,6 +77,9 @@ async function loadTodaySalah(userId){
 // Listen for checkbox clicks and save them instantly
 ['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'].forEach(salah => {
     document.getElementById(salah).addEventListener('change', async (e) => {
+        // Instantly update visual progress
+        updateProgress();
+
         const user = auth.currentUser;
         if (!user) return; // Stop if not logged in
 
@@ -123,5 +145,7 @@ onAuthStateChanged(auth,(user) => {
         ['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'].forEach(prayer =>{
             document.getElementById(prayer).checked = false;
         })
+        // Reset the progress bar visually on logout
+        updateProgress();
     }
 })
