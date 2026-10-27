@@ -8,8 +8,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh; /* Changed from height to min-height to allow scrolling if needed */
     margin: 0;
+    padding: 20px; /* Ensures the container doesn't touch the edges on small phones */
 }
 
 .container {
@@ -17,7 +18,8 @@ body {
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    width: 350px;
+    width: 100%; /* Allows the container to shrink on small screens */
+    max-width: 400px; /* Prevents the container from stretching too wide on desktops */
     text-align: center;
 }
 
@@ -49,7 +51,7 @@ button {
 button:hover { background-color: #219150; }
 button.secondary { background-color: #3498db; }
 button.secondary:hover { background-color: #2980b9; }
-button.logout { background-color: #e74c3c; width: auto; padding: 5px 10px; font-size: 14px;}
+button.logout { background-color: #e74c3c; width: auto; padding: 6px 12px; font-size: 14px;}
 
 .hidden { display: none; }
 .error-msg { color: #e74c3c; font-size: 14px; }
@@ -58,6 +60,8 @@ button.logout { background-color: #e74c3c; width: auto; padding: 5px 10px; font-
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap; /* Allows the logout button to drop down cleanly if space gets tight */
+    gap: 10px;
 }
 
 .salah-list {
@@ -78,3 +82,14 @@ button.logout { background-color: #e74c3c; width: auto; padding: 5px 10px; font-
 
 .salah-item:hover { background: #eef2f5; }
 .salah-item input { width: 20px; height: 20px; margin-right: 15px; }
+
+/* Responsive adjustments for mobile screens */
+@media (max-width: 480px) {
+    .container {
+        padding: 20px; /* Slightly less padding to maximize screen real estate */
+    }
+    
+    .prayer-item {
+        padding: 12px;
+    }
+}
