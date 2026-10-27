@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Salah Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Login Section -->
+         <div id="auth-section">
+            <h2>Welcome</h2>
+            <p>Please log in to track your salah.</p>
+            <input type="email" name="email" id="email" placeholder="Email Adress">
+            <input type="password" name="password" id="password" placeholder="Password">
+            <div class="auth-buttons">
+                <button id="login-btn">Log In</button>
+                <button id="signup-btn" class="secondary">Sign Up</button>
+            </div>
+            <p id="auth-error" class="error-message"></p>
+         </div>
+
+         <!-- Tracker Section (Hidden by default) -->
+          <div id="tracker-section" class="hidden">
+            <div class="header">
+                <h2>Today's Salah</h2>
+                <button id="logout-btn" class="logout">Log Out</button>
+            </div>
+            <p id="current-date"></p>
+            <div id="salah-list">
+                <label class="salah-item">
+                    <input type="checkbox" id="fajr"><span>Fajr</span>
+                </label>
+                <label class="salah-item">
+                    <input type="checkbox" id="dhuhr"><span>Dhuhr</span>
+                </label>
+                <label class="salah-item">
+                    <input type="checkbox" id="asr"><span>Asr</span>
+                </label>
+                <label class="salah-item">
+                    <input type="checkbox" id="maghrib"><span>Maghrib</span>
+                </label>
+                <label class="salah-item">
+                    <input type="checkbox" id="isha"><span>Isha</span>
+                </label>
+            </div>
+          </div>
+    </div>
+    <!-- Linking to javascript file as module -->
+    <script type="module" src="app.js"></script>
+</body>
+</html>
